@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="DevOps Interview Lab: 520+ scenario-based MCQs across Linux, Git, CI/CD, Docker, Kubernetes, Cloud, Monitoring, Security, Networking, and incident response.">
+<meta name="theme-color" content="#2457d6">
+<meta property="og:title" content="DevOps Interview Lab">
+<meta property="og:description" content="Practice 520+ production-focused DevOps interview questions in your browser.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/images/devops-lab.svg" type="image/svg+xml">
+<title>DevOps Interview Lab | 520+ Scenario-Based MCQs</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">∞</div>
+      <div><h1>DevOps Interview Lab</h1><div class="subtitle">Production-focused practice from 520+ scenario-based MCQs</div></div>
+    </div>
+    <div class="header-stat" id="bestScore">Best score: Not attempted</div>
+  </header>
+
+  <main class="panel">
+    <section id="setupView" class="panel-body">
+      <div class="hero">
+        <div>
+          <h2>Build a focused interview practice session.</h2>
+          <p>Choose your topics, difficulty, and session length. Questions are shuffled without repetition, and every answer includes the explanation from the PDF question bank.</p>
+          <div class="grid">
+            <div class="field">
+              <label class="main" for="sessionSize">Questions per session</label>
+              <select id="sessionSize">
+                <option value="10">10 questions</option>
+                <option value="20" selected>20 questions</option>
+                <option value="50">50 questions</option>
+                <option value="100">100 questions</option>
+                <option value="all">All matching questions</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="main" for="feedbackMode">Answer feedback</label>
+              <select id="feedbackMode">
+                <option value="instant" selected>Show after each answer</option>
+                <option value="exam">Show only in final report</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="mini"><span>Question bank</span><strong>520 MCQs</strong></div>
+          <div class="mini"><span>Domains</span><strong>10</strong></div>
+          <div class="mini"><span>Difficulty levels</span><strong>4</strong></div>
+          <div class="mini"><span>Works offline</span><strong>Yes</strong></div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Topics</h3>
+      <div class="field"><div class="check-grid" id="topicChecks"></div></div>
+      <h3 class="section-title">Difficulty</h3>
+      <div class="field"><div class="check-grid" id="difficultyChecks"></div></div>
+      <div class="actions">
+        <button class="btn btn-primary" id="startBtn">Start random quiz</button>
+        <button class="btn btn-secondary" id="selectAllBtn">Select all</button>
+        <button class="btn btn-secondary" id="clearProgressBtn">Clear saved progress</button>
+      </div>
+    </section>
+
+    <section id="quizView" class="hidden">
+      <div class="quiz-head">
+        <div class="quiz-row">
+          <div class="progress-wrap"><div class="progress" id="progressBar"></div></div>
+          <div class="progress-label" id="progressLabel"></div>
+          <div class="score-pill" id="liveScore">0 correct</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="meta">
+          <span class="badge primary" id="questionId"></span>
+          <span class="badge" id="topicBadge"></span>
+          <span class="badge" id="difficultyBadge"></span>
+        </div>
+        <p class="question" id="questionText"></p>
+        <div class="options" id="options"></div>
+        <div id="feedback" class="feedback hidden"></div>
+        <div class="quiz-actions">
+          <button class="btn btn-danger" id="stopBtn">Stop & view results</button>
+          <span class="hint">Keyboard: A-D to answer, Enter for next</span>
+          <button class="btn btn-primary" id="nextBtn" disabled>Next question</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsView" class="panel-body hidden">
+      <div class="results-top">
+        <div class="score-circle" id="scoreCircle"><span id="finalPercent">0%</span></div>
+        <h2 id="resultHeading">Session complete</h2>
+        <p id="resultMessage"></p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="answeredStat">0</strong><span>Answered</span></div>
+        <div class="stat"><strong id="correctStat">0</strong><span>Correct</span></div>
+        <div class="stat"><strong id="wrongStat">0</strong><span>Incorrect</span></div>
+        <div class="stat"><strong id="streakStat">0</strong><span>Best streak</span></div>
+      </div>
+      <h3 class="section-title">Topic performance</h3>
+      <div style="overflow:auto"><table class="breakdown"><thead><tr><th>Topic</th><th>Correct</th><th>Answered</th><th>Score</th></tr></thead><tbody id="breakdownBody"></tbody></table></div>
+      <h3 class="section-title">Review incorrect answers</h3>
+      <div class="review-list" id="reviewList"></div>
+      <div class="actions">
+        <button class="btn btn-primary" id="newSessionBtn">New session</button>
+        <button class="btn btn-secondary" id="retryMissedBtn">Retry missed questions</button>
+        <button class="btn btn-secondary" onclick="window.print()">Print results</button>
+      </div>
+    </section>
+  </main>
+  <div class="footer">Open-source DevOps interview practice. Scores stay in your browser. <a href="resources/devops-interview-520-mcq-question-bank.pdf">Download the PDF question bank</a>.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="assets/js/questions.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
