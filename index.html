@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="DevOps Interview Lab: 520+ production-focused questions, interview simulations, and incident practice across Linux, Kubernetes, cloud, networking, security, CI/CD and more.">
+  <meta name="description" content="DevOps Interview Lab: 1,120+ production-focused questions, interview simulations, and incident practice across Linux, Kubernetes, cloud, networking, security, CI/CD and more.">
   <meta name="theme-color" content="#07111f">
   <meta property="og:title" content="DevOps Interview Lab">
   <meta property="og:description" content="Practice production-focused DevOps interview questions and incident scenarios in your browser.">
@@ -29,7 +29,6 @@
         <button class="top-link" data-nav="modes" data-mode-shortcut="interview">Interview</button>
         <button class="top-link" data-nav="labs">Labs</button>
         <button class="top-link" data-nav="achievements">Achievements</button>
-        <button class="top-link" data-nav="resources">Resources</button>
       </nav>
       <div class="top-actions">
         <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">☾</button>
@@ -44,7 +43,6 @@
         <button class="side-link" data-nav="modes" data-mode-shortcut="interview"><span>♙</span>Interview</button>
         <button class="side-link" data-nav="labs"><span>⌁</span>Incident Lab</button>
         <button class="side-link" data-nav="achievements"><span>◇</span>Achievements</button>
-        <button class="side-link" data-nav="resources"><span>▤</span>Resources</button>
       </div>
       <div class="side-bottom">
         <div class="mini-progress">
@@ -61,7 +59,7 @@
           <div class="hero-copy">
             <div class="eyebrow">PRACTICE • LEARN • GET READY</div>
             <h1>Master DevOps interviews with <span>production context.</span></h1>
-            <p>Work through 520+ scenario-based questions, timed interview simulations, and incident-style challenges across the systems you operate every day.</p>
+            <p>Work through 1,120+ scenario-based questions, timed interview simulations, and incident-style challenges across the systems you operate every day.</p>
             <div class="hero-actions">
               <button class="btn btn-primary" data-nav="modes">Start practicing →</button>
               <button class="btn btn-secondary" data-nav="labs">Browse labs</button>
@@ -85,8 +83,8 @@ $ kubectl describe pod api-79ab1
           </div>
         </div>
         <div class="metric-strip">
-          <div><span>Question bank</span><strong>520+</strong></div>
-          <div><span>Domains</span><strong>10</strong></div>
+          <div><span>Question bank</span><strong>1,120+</strong></div>
+          <div><span>Domains</span><strong>20</strong></div>
           <div><span>Difficulty</span><strong>4 levels</strong></div>
           <div><span>Practice modes</span><strong>4</strong></div>
           <div><span>Best score</span><strong id="homeBest">—</strong></div>
@@ -268,18 +266,12 @@ $ kubectl describe pod api-79ab1
         </div>
       </section>
 
-      <section class="view hidden" id="resourcesView">
-        <div class="page-head"><div><span class="eyebrow">RESOURCES</span><h2>Study resources</h2><p>Use the web app for repeated practice and the PDF when you want an offline question bank.</p></div></div>
-        <div class="resource-grid">
-          <a class="resource-card" href="resources/devops-interview-520-mcq-question-bank.pdf"><span>PDF</span><h3>520+ MCQ Question Bank</h3><p>Printable reference with answers and explanations appended at the end.</p><b>Open PDF →</b></a>
-          <a class="resource-card" href="https://github.com/naser-naseer/devops-interview-lab" target="_blank" rel="noopener"><span>GitHub</span><h3>Project repository</h3><p>View the source, CI checks, Pages workflow, and contribute improvements.</p><b>Open repository →</b></a>
-        </div>
-      </section>
     </main>
   </div>
 
   <div class="toast" id="toast" role="status"></div>
   <script src="assets/js/questions.js"></script>
+  <script src="assets/js/questions-hardpack.js"></script>
   <script src="assets/js/scoring.js"></script>
   <script src="assets/js/storage.js"></script>
   <script src="assets/js/app.js"></script>
