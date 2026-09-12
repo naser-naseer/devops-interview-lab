@@ -1,12 +1,14 @@
 {
   "name": "devops-interview-lab",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
-  "description": "A browser-based DevOps interview and incident-practice lab with 520+ scenario-based MCQs.",
+  "description": "A browser-based DevOps interview and incident-practice lab with 1,120+ production-focused questions.",
   "scripts": {
     "test": "node scripts/validate-questions.mjs",
-    "check:js": "node --check assets/js/questions.js && node --check assets/js/scoring.js && node --check assets/js/storage.js && node --check assets/js/app.js",
+    "check:js": "node --check assets/js/questions.js && node --check assets/js/questions-hardpack.js && node --check assets/js/scoring.js && node --check assets/js/storage.js && node --check assets/js/app.js",
     "check": "npm run check:js && npm test"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
