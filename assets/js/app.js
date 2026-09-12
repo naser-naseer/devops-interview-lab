@@ -1,4 +1,5 @@
-const TOPICS = [...new Set(QUESTION_BANK.map(q => q.topic))];
+const ALL_QUESTIONS = [...QUESTION_BANK, ...(typeof HARD_QUESTION_BANK !== 'undefined' ? HARD_QUESTION_BANK : [])];
+const TOPICS = [...new Set(ALL_QUESTIONS.map(q => q.topic))];
 const DIFFICULTIES = ['Foundational', 'Intermediate', 'Advanced', 'Expert'];
 const LETTERS = ['A', 'B', 'C', 'D'];
 const INCIDENT_STEPS = ['Detect', 'Diagnose', 'Analyze', 'Remediate', 'Verify', 'Prevent'];
@@ -103,7 +104,7 @@ function updatePreview() {
   const diffs = selectedValues('difficulty');
   const modeLabel = ({practice:'Practice',interview:'Interview',incident:'Incident Lab',custom:'Custom Quiz'})[state.mode] || 'Custom Quiz';
   $('previewMode').textContent = modeLabel;
-  $('previewTopics').textContent = topics.length === TOPICS.length ? 'All 10 domains' : `${topics.length} selected`;
+  $('previewTopics').textContent = topics.length === TOPICS.length ? `All ${TOPICS.length} domains` : `${topics.length} selected`;
   $('previewDifficulty').textContent = diffs.length === 4 ? 'All levels' : (diffs.join(', ') || 'None');
   $('previewQuestions').textContent = state.mode === 'incident' ? '6' : $('sessionSize').selectedOptions[0].textContent;
   $('previewTimer').textContent = Number($('timeLimit').value) ? `${$('timeLimit').value} sec` : 'Off';
@@ -121,9 +122,9 @@ function startSession(customQuestions = null) {
   const topics = selectedValues('topic');
   const diffs = selectedValues('difficulty');
   if (!customQuestions && (!topics.length || !diffs.length)) return toast('Select at least one topic and difficulty.');
-  let pool = customQuestions || QUESTION_BANK.filter(q => topics.includes(q.topic) && diffs.includes(q.difficulty));
+  let pool = customQuestions || ALL_QUESTIONS.filter(q => topics.includes(q.topic) && diffs.includes(q.difficulty));
   if (state.mode === 'incident' && !customQuestions) {
-    pool = QUESTION_BANK.filter(q => ['Advanced','Expert'].includes(q.difficulty));
+    pool = ALL_QUESTIONS.filter(q => ['Advanced','Expert'].includes(q.difficulty));
   }
   if (!pool.length) return toast('No questions match these filters.');
   const requested = state.mode === 'incident' ? 6 : ($('sessionSize').value === 'all' ? pool.length : Math.min(Number($('sessionSize').value), pool.length));
@@ -151,7 +152,17 @@ function contextFor(q) {
     'Monitoring and Observability':'Choose signals that explain user impact and help distinguish symptoms from root causes.',
     'Networking':'Follow the path layer by layer: name resolution, routing, ports, state, load balancing, and timeouts.',
     'Security':'Apply least privilege, short-lived identity, explicit trust boundaries, and auditable controls.',
-    'Architecture and Incident Response':'Choose the action that reduces risk, preserves evidence, and addresses the underlying failure mode.'
+    'Architecture and Incident Response':'Choose the action that reduces risk, preserves evidence, and addresses the underlying failure mode.',
+    'Terraform and IaC':'Treat the plan and state as production control surfaces: understand drift, identity, replacement, and blast radius before applying.',
+    'Helm':'Think about rendered manifests, Kubernetes API semantics, release history, and external side effects such as database migrations.',
+    'GitOps and Argo CD':'Git is the declared state, but safe GitOps still needs review, promotion controls, reconciliation awareness, and a break-glass path.',
+    'Service Mesh and Envoy':'Follow the request through policy, proxy configuration, endpoint selection, mTLS, retries, and upstream connection state.',
+    'Kafka and Streaming':'Reason from partition ownership, delivery semantics, consumer throughput, durability settings, and backpressure—not just broker CPU.',
+    'Redis':'Separate memory policy, key distribution, event-loop blocking, replication semantics, and client connection behavior.',
+    'Database Operations':'Start with transaction behavior, execution plans, connection queues, replication consistency, and recovery requirements.',
+    'SRE and Reliability':'Optimize for user-visible reliability, controlled blast radius, sustainable operations, and decisions tied to SLOs and error budgets.',
+    'Performance Engineering':'Look for queueing, tail latency, workload-model bias, resource saturation, and the real serial or bounded part of the system.',
+    'eBPF and Linux Observability':'Use the least invasive signal that answers the question, keep kernel safety and overhead in mind, and preserve workload attribution.'
   };
   return map[topic] || 'Choose the answer that best addresses the underlying operational risk, not just the visible symptom.';
 }
@@ -168,7 +179,7 @@ function renderQuestion() {
   state.locked = false;
   state.questionStartedAt = Date.now();
   $('questionCounter').textContent = `Question ${state.index + 1} of ${state.session.length}`;
-  $('questionSource').textContent = `Source Q${String(q.id).padStart(3,'0')}`;
+  $('questionSource').textContent = `Q${String(q.id).padStart(3,'0')} · ${q.pack || 'Core Bank'}`;
   const pct = Math.round((state.index / state.session.length) * 100);
   $('questionPercent').textContent = `${pct}%`;
   $('questionProgress').style.width = `${pct}%`;
@@ -269,7 +280,8 @@ function showFeedback(q, correct, letter) {
   const f = $('feedback');
   f.className = `feedback ${correct ? 'correct' : 'wrong'}`;
   const title = correct ? 'Correct' : `Incorrect — correct answer: ${q.answer}`;
-  f.innerHTML = `<div class="feedback-head"><span>${correct ? '✓' : '!'}</span><strong>${title}</strong></div><p>${escapeHtml(q.explanation)}</p><div class="feedback-tip"><b>Production takeaway</b>${escapeHtml(contextFor(q))}</div>`;
+  const whyWrong = q.whyWrong ? `<details class="why-wrong"><summary>Why the other options miss the mark</summary><div>${Object.entries(q.whyWrong).map(([key,reason]) => `<p><b>${key}.</b> ${escapeHtml(reason)}</p>`).join('')}</div></details>` : '';
+  f.innerHTML = `<div class="feedback-head"><span>${correct ? '✓' : '!'}</span><strong>${title}</strong></div><p>${escapeHtml(q.explanation)}</p>${whyWrong}<div class="feedback-tip"><b>Production takeaway</b>${escapeHtml(contextFor(q))}</div>`;
 }
 
 function updateLiveScore() {
@@ -324,7 +336,7 @@ function startWeakAreas() {
   const p = DEVOPS_STORAGE.progress();
   const ranked = Object.entries(p.topics || {}).filter(([,v]) => v.answered >= 3).map(([topic,v]) => ({ topic, pct: v.correct / v.answered })).sort((a,b) => a.pct - b.pct);
   const topics = ranked.slice(0,3).map(x => x.topic);
-  const pool = QUESTION_BANK.filter(q => (topics.length ? topics.includes(q.topic) : state.weakTopics.includes(q.topic)) && ['Intermediate','Advanced','Expert'].includes(q.difficulty));
+  const pool = ALL_QUESTIONS.filter(q => (topics.length ? topics.includes(q.topic) : state.weakTopics.includes(q.topic)) && ['Intermediate','Advanced','Expert'].includes(q.difficulty));
   if (!pool.length) return toast('Complete more sessions before weak-area practice is available.');
   state.mode = 'weak'; state.feedbackMode = 'instant'; state.timeLimit = 0;
   state.session = shuffle(pool).slice(0, Math.min(20, pool.length)); state.index = 0; state.responses = []; state.streak = 0; state.bestStreak = 0;

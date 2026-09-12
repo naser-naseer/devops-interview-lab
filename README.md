@@ -1,177 +1,140 @@
 # DevOps Interview Lab
 
-> 520+ scenario-based interview questions for engineers who want to practice production reasoning—not just memorize commands.
+> 1,120+ production-focused interview questions for engineers who want to practice how real systems fail—not just memorize commands.
 
-**DevOps Interview Lab** is a lightweight, browser-based practice environment covering Linux, Git, CI/CD, Docker, Kubernetes, Cloud, Monitoring, Networking, Security, Architecture, and Incident Response.
+DevOps Interview Lab is a static browser-based practice environment for DevOps, SRE, cloud, platform, Linux, Kubernetes, networking, observability, security, infrastructure-as-code, streaming, databases, and incident response.
 
-The project is intentionally static: no backend, no login, no database, and no tracking. It can run locally or be published directly with GitHub Pages.
+There is no backend, login, database, or tracking. Run it locally or publish it directly with GitHub Pages.
 
+## Version 3 — Hard Pack
 
-## Version 2 interface
+Version 3 keeps the original 520-question Core Bank and adds **600 Advanced/Expert questions**, taking the project to **1,120 questions across 20 domains**.
 
-The current release adds a production-console style UI with four practice modes: **Practice**, **Interview**, **Incident Lab**, and **Custom Quiz**. It also adds timers, weighted difficulty scoring, readiness reporting, bookmarks, local achievements, dark/light/system themes, and cumulative topic progress while keeping the original 520-question bank intact.
+The additional questions are deliberately written like conversations you might have during an interview, change review, design discussion, or production incident. They emphasize judgement, evidence, trade-offs, and what you would actually do next.
 
-See [`docs/V2-UPGRADE.md`](docs/V2-UPGRADE.md) for the upgrade and deployment notes.
+The 600-question Hard Pack is split into:
 
-## Why this project exists
+- **300 Senior Production Pack questions** that take proven DevOps concepts and place them in more realistic on-call, release, outage, and review situations.
+- **300 Specialist Deep-Dive questions** across Terraform/IaC, Helm, GitOps/Argo CD, Service Mesh/Envoy, Kafka, Redis, Database Operations, SRE, Performance Engineering, and eBPF/Linux observability.
 
-DevOps interviews increasingly test how an engineer reasons through failure modes, operational trade-offs, and production incidents. This project turns a 520+ question bank into short randomized practice sessions that are easy to repeat.
+Specialist questions also include **“Why the other options miss the mark”** explanations so the app teaches the reasoning, not only the answer.
 
-Instead of focusing only on syntax, the question bank emphasizes situations such as:
+## Current coverage
 
-- Kubernetes scheduling, probes, services, DNS, resource limits, and rollouts
-- Linux CPU, memory, process, filesystem, and I/O diagnosis
-- Git recovery, rebasing, and safe collaboration workflows
-- Docker networking, persistence, images, and runtime behavior
-- CI/CD deployment safety and credential handling
-- Cloud resilience, multi-AZ design, and failure capacity
-- Prometheus alerting, ratios, observability, and incident signals
-- Networking, security, architecture, and production incident response
+The app now covers 20 domains:
+
+- Linux
+- Git
+- CI/CD
+- Docker
+- Kubernetes
+- Cloud
+- Monitoring and Observability
+- Networking
+- Security
+- Architecture and Incident Response
+- Terraform and IaC
+- Helm
+- GitOps and Argo CD
+- Service Mesh and Envoy
+- Kafka and Streaming
+- Redis
+- Database Operations
+- SRE and Reliability
+- Performance Engineering
+- eBPF and Linux Observability
 
 ## Features
 
-- 520+ embedded MCQs
-- Randomized questions without repetition
+- 1,120+ embedded questions
+- 600-question Advanced/Expert Hard Pack
+- Practice, Interview, Incident Lab, and Custom Quiz modes
 - Topic and difficulty filters
-- 10, 20, 50, 100, or all-question sessions
-- Instant-feedback and exam modes
-- Explanations for every answer
-- Live score and progress tracking
-- Topic-by-topic performance report
-- Review and retry of missed questions
-- Keyboard shortcuts (`A-D`, `Enter`)
-- Browser-local best-score storage
-- Works offline
-- No backend or external runtime dependencies
+- Timed interview sessions
+- Weighted scoring and readiness reporting
+- Immediate feedback or exam-style feedback
+- Humanized production scenarios
+- Detailed explanations
+- “Why the other options miss the mark” for specialist questions
+- Bookmarks, achievements, and local progress
+- Weak-area retry sessions
+- Dark, light, and system themes
+- No backend or external runtime dependency
 
-## Live demo
+## Question files
 
-After enabling GitHub Pages, your site will be available at:
+The question bank is intentionally split so the original bank stays easy to preserve:
 
 ```text
-https://<your-github-username>.github.io/devops-interview-lab/
+assets/js/questions.js            # Original 520-question Core Bank
+assets/js/questions-hardpack.js   # New 600-question Hard Pack
 ```
 
-Replace `<your-github-username>` in this README after publishing.
+The browser combines both at runtime.
 
-## Repository structure
+A readable Hard Pack reference is also included:
 
 ```text
-devops-interview-lab/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md
-│   │   └── question_improvement.md
-│   ├── workflows/
-│   │   ├── ci.yml
-│   │   └── deploy-pages.yml
-│   └── pull_request_template.md
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   ├── images/
-│   │   ├── devops-interview-lab.png
-│   │   └── devops-lab.svg
-│   └── js/
-│       ├── app.js
-│       └── questions.js
-├── docs/
-│   └── DEPLOYMENT.md
-├── resources/
-│   └── devops-interview-520-mcq-question-bank.pdf
-├── scripts/
-│   └── validate-questions.mjs
-├── .gitignore
-├── .nojekyll
-├── CONTRIBUTING.md
-├── LICENSE
-├── SECURITY.md
-├── index.html
-├── package.json
-└── README.md
+resources/devops-hardpack-600-question-bank.md
+resources/devops-hardpack-600-question-bank.json
 ```
 
 ## Run locally
-
-The simplest option is to open `index.html` directly in a modern browser.
-
-For an HTTP server:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:8080
 ```
 
-## Validate the project
+## Validate everything
 
-Node.js is only needed for repository validation, not for running the quiz.
+Node.js is only needed for repository validation:
 
 ```bash
 npm run check
 ```
 
-The validator checks JavaScript syntax and verifies that the question bank has at least 520 questions, unique IDs, valid difficulty levels, four options per question, and valid A-D answers.
+Expected result:
 
-## Publish with GitHub Pages
+```text
+Validated 1120 questions across 20 topics.
+Core bank: 520
+Hard pack: 600
+```
 
-1. Create a new public GitHub repository named `devops-interview-lab`.
-2. Push this project to the `main` branch.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment → Source**, choose **GitHub Actions**.
-5. Open the **Actions** tab and confirm `Deploy GitHub Pages` succeeds.
-6. Your live URL will be shown in the deployment environment and Pages settings.
+The validator checks JavaScript syntax, unique question IDs, valid difficulty levels, four distinct options, valid A-D answers, duplicate stems, and optional `whyWrong` metadata.
 
-The included workflow validates the question bank, stages the static site, uploads the Pages artifact, and deploys it to the `github-pages` environment.
+## GitHub Pages deployment
 
-## First push
+The existing Pages workflow still works. It validates the project, copies `index.html`, `assets/`, and `resources/`, then deploys the static site.
 
-```bash
-git init
-git add .
-git commit -m "feat: launch DevOps Interview Lab"
-git branch -M main
-git remote add origin https://github.com/<your-github-username>/devops-interview-lab.git
-git push -u origin main
+For an upgrade from the existing v2 repository, follow:
+
+[`docs/DEPLOY-HARDPACK-V3.md`](docs/DEPLOY-HARDPACK-V3.md)
+
+The live project URL is:
+
+```text
+https://naser-naseer.github.io/devops-interview-lab/
 ```
 
 ## CI/CD
 
-Two workflows are included:
+**Quality Checks** runs on pushes and pull requests.
 
-**Quality Checks** runs on pushes and pull requests to validate JavaScript and question-bank integrity.
+**Deploy GitHub Pages** runs when `main` changes or when triggered manually.
 
-**Deploy GitHub Pages** runs on pushes to `main` or manually. It validates the project and publishes the static site through GitHub Pages.
-
-## Roadmap
-
-Potential extensions:
-
-- Timed interview mode
-- Bookmarked questions
-- Weak-topic adaptive sessions
-- Searchable question browser
-- Import/export session results
-- Question statistics by topic and difficulty
-- PWA/offline installation
-- Optional JSON question format and contributor tooling
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Technical corrections and production-realistic scenarios are especially welcome.
+No workflow redesign is required for Version 3 because the existing workflow already publishes the `assets` and `resources` directories.
 
 ## Privacy
 
-The application is entirely client-side. Scores are stored in browser local storage and are not sent to a server.
+Everything runs in the browser. Scores and preferences are stored in local storage and are not sent to a server.
 
 ## License
 
 Released under the [MIT License](LICENSE).
-
----
-
-If this project helps with your interview preparation, consider starring the repository and sharing it with other engineers.
