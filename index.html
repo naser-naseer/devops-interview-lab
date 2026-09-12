@@ -1,124 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="DevOps Interview Lab: 520+ scenario-based MCQs across Linux, Git, CI/CD, Docker, Kubernetes, Cloud, Monitoring, Security, Networking, and incident response.">
-<meta name="theme-color" content="#2457d6">
-<meta property="og:title" content="DevOps Interview Lab">
-<meta property="og:description" content="Practice 520+ production-focused DevOps interview questions in your browser.">
-<meta property="og:type" content="website">
-<link rel="icon" href="assets/images/devops-lab.svg" type="image/svg+xml">
-<title>DevOps Interview Lab | 520+ Scenario-Based MCQs</title>
-<link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DevOps Interview Lab: 520+ production-focused questions, interview simulations, and incident practice across Linux, Kubernetes, cloud, networking, security, CI/CD and more.">
+  <meta name="theme-color" content="#07111f">
+  <meta property="og:title" content="DevOps Interview Lab">
+  <meta property="og:description" content="Practice production-focused DevOps interview questions and incident scenarios in your browser.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/images/devops-lab.svg" type="image/svg+xml">
+  <title>DevOps Interview Lab | Production Practice</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<div class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">∞</div>
-      <div><h1>DevOps Interview Lab</h1><div class="subtitle">Production-focused practice from 520+ scenario-based MCQs</div></div>
-    </div>
-    <div class="header-stat" id="bestScore">Best score: Not attempted</div>
-  </header>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle navigation">☰</button>
+      <a class="brand" href="#" data-nav="home" aria-label="DevOps Interview Lab home">
+        <span class="brand-mark">∞</span>
+        <span class="brand-copy">
+          <strong>DevOps Interview Lab</strong>
+          <small>Production practice</small>
+        </span>
+      </a>
+      <nav class="top-links" aria-label="Primary">
+        <button class="top-link active" data-nav="home">Home</button>
+        <button class="top-link" data-nav="modes">Practice</button>
+        <button class="top-link" data-nav="modes" data-mode-shortcut="interview">Interview</button>
+        <button class="top-link" data-nav="labs">Labs</button>
+        <button class="top-link" data-nav="achievements">Achievements</button>
+        <button class="top-link" data-nav="resources">Resources</button>
+      </nav>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">☾</button>
+        <div class="profile-chip" title="Local profile">DN</div>
+      </div>
+    </header>
 
-  <main class="panel">
-    <section id="setupView" class="panel-body">
-      <div class="hero">
-        <div>
-          <h2>Build a focused interview practice session.</h2>
-          <p>Choose your topics, difficulty, and session length. Questions are shuffled without repetition, and every answer includes the explanation from the PDF question bank.</p>
-          <div class="grid">
-            <div class="field">
-              <label class="main" for="sessionSize">Questions per session</label>
-              <select id="sessionSize">
-                <option value="10">10 questions</option>
-                <option value="20" selected>20 questions</option>
-                <option value="50">50 questions</option>
-                <option value="100">100 questions</option>
-                <option value="all">All matching questions</option>
-              </select>
+    <aside class="sidebar" id="sidebar">
+      <div class="side-group">
+        <button class="side-link active" data-nav="home"><span>⌂</span>Home</button>
+        <button class="side-link" data-nav="modes"><span>▣</span>Practice</button>
+        <button class="side-link" data-nav="modes" data-mode-shortcut="interview"><span>♙</span>Interview</button>
+        <button class="side-link" data-nav="labs"><span>⌁</span>Incident Lab</button>
+        <button class="side-link" data-nav="achievements"><span>◇</span>Achievements</button>
+        <button class="side-link" data-nav="resources"><span>▤</span>Resources</button>
+      </div>
+      <div class="side-bottom">
+        <div class="mini-progress">
+          <span>Best score</span>
+          <strong id="sidebarBest">—</strong>
+        </div>
+        <button class="side-link" data-nav="settings"><span>⚙</span>Settings</button>
+      </div>
+    </aside>
+
+    <main class="content" id="mainContent">
+      <section class="view" id="homeView">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <div class="eyebrow">PRACTICE • LEARN • GET READY</div>
+            <h1>Master DevOps interviews with <span>production context.</span></h1>
+            <p>Work through 520+ scenario-based questions, timed interview simulations, and incident-style challenges across the systems you operate every day.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-nav="modes">Start practicing →</button>
+              <button class="btn btn-secondary" data-nav="labs">Browse labs</button>
             </div>
-            <div class="field">
-              <label class="main" for="feedbackMode">Answer feedback</label>
-              <select id="feedbackMode">
-                <option value="instant" selected>Show after each answer</option>
-                <option value="exam">Show only in final report</option>
-              </select>
+            <div class="hero-note">No sign-in. No backend. Your progress stays in this browser.</div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="terminal-window">
+              <div class="terminal-head"><span></span><span></span><span></span><b>production-shell</b></div>
+              <pre><code>$ kubectl get pods -n api
+NAME          READY   STATUS
+api-66bf7     1/1     Running
+api-79ab1     0/1     Pending
+
+$ kubectl describe pod api-79ab1
+0/8 nodes available:
+3 Insufficient cpu
+5 didn't match affinity</code></pre>
             </div>
+            <div class="sticky-note">Build → Diagnose → Decide → Improve</div>
           </div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="mini"><span>Question bank</span><strong>520 MCQs</strong></div>
-          <div class="mini"><span>Domains</span><strong>10</strong></div>
-          <div class="mini"><span>Difficulty levels</span><strong>4</strong></div>
-          <div class="mini"><span>Works offline</span><strong>Yes</strong></div>
+        <div class="metric-strip">
+          <div><span>Question bank</span><strong>520+</strong></div>
+          <div><span>Domains</span><strong>10</strong></div>
+          <div><span>Difficulty</span><strong>4 levels</strong></div>
+          <div><span>Practice modes</span><strong>4</strong></div>
+          <div><span>Best score</span><strong id="homeBest">—</strong></div>
         </div>
-      </div>
+      </section>
 
-      <h3 class="section-title">Topics</h3>
-      <div class="field"><div class="check-grid" id="topicChecks"></div></div>
-      <h3 class="section-title">Difficulty</h3>
-      <div class="field"><div class="check-grid" id="difficultyChecks"></div></div>
-      <div class="actions">
-        <button class="btn btn-primary" id="startBtn">Start random quiz</button>
-        <button class="btn btn-secondary" id="selectAllBtn">Select all</button>
-        <button class="btn btn-secondary" id="clearProgressBtn">Clear saved progress</button>
-      </div>
-    </section>
+      <section class="view hidden" id="modesView">
+        <div class="page-head">
+          <div><span class="eyebrow">TRAINING MODE</span><h2>Choose your learning mode</h2><p>Different modes change feedback, timing, question selection, and scoring pressure.</p></div>
+        </div>
+        <div class="mode-grid">
+          <article class="mode-card practice-card">
+            <div class="mode-icon">▤</div><h3>Practice</h3><p>Learn with instant feedback and detailed explanations after every answer.</p>
+            <ul><li>Immediate answer feedback</li><li>No timer by default</li><li>Best for structured learning</li></ul>
+            <button class="btn btn-card" data-start-mode="practice">Start practice →</button>
+          </article>
+          <article class="mode-card interview-card">
+            <div class="mode-icon">♙</div><h3>Interview</h3><p>Simulate a real technical interview. Feedback is held until the final report.</p>
+            <ul><li>60 seconds per question</li><li>No answer hints</li><li>Final readiness report</li></ul>
+            <button class="btn btn-card" data-start-mode="interview">Start interview →</button>
+          </article>
+          <article class="mode-card incident-card">
+            <div class="mode-icon">△</div><h3>Incident Lab</h3><p>Work through a short sequence of advanced production scenarios under time pressure.</p>
+            <ul><li>6 production questions</li><li>Advanced + Expert mix</li><li>Incident-style progression</li></ul>
+            <button class="btn btn-card" data-start-mode="incident">Open incident lab →</button>
+          </article>
+          <article class="mode-card custom-card">
+            <div class="mode-icon">⚙</div><h3>Custom Quiz</h3><p>Choose your own topics, difficulty levels, length, feedback style, and timer.</p>
+            <ul><li>Full topic control</li><li>10–100+ questions</li><li>Optional timed mode</li></ul>
+            <button class="btn btn-card" data-start-mode="custom">Configure quiz →</button>
+          </article>
+        </div>
+      </section>
 
-    <section id="quizView" class="hidden">
-      <div class="quiz-head">
-        <div class="quiz-row">
-          <div class="progress-wrap"><div class="progress" id="progressBar"></div></div>
-          <div class="progress-label" id="progressLabel"></div>
-          <div class="score-pill" id="liveScore">0 correct</div>
+      <section class="view hidden" id="setupView">
+        <div class="page-head split-head">
+          <div><span class="eyebrow">SESSION BUILDER</span><h2>Configure your session</h2><p>Select the domains and pressure level you want to practice.</p></div>
+          <button class="btn btn-secondary" data-nav="modes">← Modes</button>
         </div>
-      </div>
-      <div class="question-card">
-        <div class="meta">
-          <span class="badge primary" id="questionId"></span>
-          <span class="badge" id="topicBadge"></span>
-          <span class="badge" id="difficultyBadge"></span>
+        <div class="setup-layout">
+          <div class="setup-main">
+            <div class="section-card">
+              <div class="section-card-head"><div><h3>Topics</h3><p>Select one or more domains.</p></div><button class="text-btn" id="selectAllTopics">Select all</button></div>
+              <div class="topic-grid" id="topicChecks"></div>
+            </div>
+            <div class="section-card">
+              <div class="section-card-head"><div><h3>Difficulty</h3><p>Mix levels or focus on senior-level scenarios.</p></div></div>
+              <div class="difficulty-row" id="difficultyChecks"></div>
+            </div>
+            <div class="section-card compact-card">
+              <div class="form-grid">
+                <label><span>Questions</span><select id="sessionSize"><option value="10">10</option><option value="20" selected>20</option><option value="50">50</option><option value="100">100</option><option value="all">All matching</option></select></label>
+                <label><span>Feedback</span><select id="feedbackMode"><option value="instant">After each answer</option><option value="exam">Final report only</option></select></label>
+                <label><span>Time per question</span><select id="timeLimit"><option value="0">No timer</option><option value="30">30 seconds</option><option value="45">45 seconds</option><option value="60" selected>60 seconds</option><option value="90">90 seconds</option></select></label>
+                <label><span>Question order</span><select id="questionOrder"><option value="random" selected>Randomized</option><option value="difficulty">Easy → Expert</option></select></label>
+              </div>
+            </div>
+          </div>
+          <aside class="session-preview">
+            <h3>Session preview</h3>
+            <dl>
+              <div><dt>Mode</dt><dd id="previewMode">Custom</dd></div>
+              <div><dt>Topics</dt><dd id="previewTopics">10 selected</dd></div>
+              <div><dt>Difficulty</dt><dd id="previewDifficulty">All levels</dd></div>
+              <div><dt>Questions</dt><dd id="previewQuestions">20</dd></div>
+              <div><dt>Timer</dt><dd id="previewTimer">60 sec</dd></div>
+            </dl>
+            <button class="btn btn-primary full" id="startSessionBtn">Start session →</button>
+            <div class="preview-tip">Tip: Advanced + Expert gives the strongest senior-level practice.</div>
+          </aside>
         </div>
-        <p class="question" id="questionText"></p>
-        <div class="options" id="options"></div>
-        <div id="feedback" class="feedback hidden"></div>
-        <div class="quiz-actions">
-          <button class="btn btn-danger" id="stopBtn">Stop & view results</button>
-          <span class="hint">Keyboard: A-D to answer, Enter for next</span>
-          <button class="btn btn-primary" id="nextBtn" disabled>Next question</button>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="resultsView" class="panel-body hidden">
-      <div class="results-top">
-        <div class="score-circle" id="scoreCircle"><span id="finalPercent">0%</span></div>
-        <h2 id="resultHeading">Session complete</h2>
-        <p id="resultMessage"></p>
-      </div>
-      <div class="stats">
-        <div class="stat"><strong id="answeredStat">0</strong><span>Answered</span></div>
-        <div class="stat"><strong id="correctStat">0</strong><span>Correct</span></div>
-        <div class="stat"><strong id="wrongStat">0</strong><span>Incorrect</span></div>
-        <div class="stat"><strong id="streakStat">0</strong><span>Best streak</span></div>
-      </div>
-      <h3 class="section-title">Topic performance</h3>
-      <div style="overflow:auto"><table class="breakdown"><thead><tr><th>Topic</th><th>Correct</th><th>Answered</th><th>Score</th></tr></thead><tbody id="breakdownBody"></tbody></table></div>
-      <h3 class="section-title">Review incorrect answers</h3>
-      <div class="review-list" id="reviewList"></div>
-      <div class="actions">
-        <button class="btn btn-primary" id="newSessionBtn">New session</button>
-        <button class="btn btn-secondary" id="retryMissedBtn">Retry missed questions</button>
-        <button class="btn btn-secondary" onclick="window.print()">Print results</button>
-      </div>
-    </section>
-  </main>
-  <div class="footer">Open-source DevOps interview practice. Scores stay in your browser. <a href="resources/devops-interview-520-mcq-question-bank.pdf">Download the PDF question bank</a>.</div>
-</div>
-<div class="toast" id="toast"></div>
-<script src="assets/js/questions.js"></script>
-<script src="assets/js/app.js"></script>
+      <section class="view hidden" id="quizView">
+        <div class="quiz-layout">
+          <aside class="quiz-side">
+            <span class="small-label">SESSION</span>
+            <strong id="quizModeLabel">Practice</strong>
+            <div class="side-meta"><span id="quizTopicLabel">Mixed</span><span id="quizDifficultyLabel">Mixed</span></div>
+            <div class="timer-block" id="timerBlock"><span>Time left</span><strong id="timerValue">—</strong><div class="timer-track"><div id="timerBar"></div></div></div>
+            <button class="quiet-btn" id="bookmarkBtn">☆ Bookmark</button>
+            <button class="quiet-btn danger-text" id="stopBtn">End session</button>
+          </aside>
+
+          <section class="question-panel">
+            <div class="question-top">
+              <div><span id="questionCounter">Question 1 of 20</span><span class="source-id" id="questionSource">Q001</span></div>
+              <strong id="questionPercent">5%</strong>
+            </div>
+            <div class="thin-progress"><div id="questionProgress"></div></div>
+
+            <div id="incidentTimeline" class="incident-timeline hidden"></div>
+
+            <div class="question-meta">
+              <span class="tag" id="topicBadge">Kubernetes</span>
+              <span class="tag muted" id="difficultyBadge">Advanced</span>
+              <span class="tag severity hidden" id="severityBadge">SEV-2</span>
+            </div>
+            <h2 class="question-text" id="questionText"></h2>
+            <div class="context-block" id="contextBlock">
+              <div class="context-label">Production reasoning</div>
+              <p id="contextText">Choose the answer that best addresses the underlying operational risk, not just the visible symptom.</p>
+            </div>
+            <div class="options" id="options"></div>
+            <div id="feedback" class="feedback hidden"></div>
+            <div class="question-actions">
+              <span class="keyboard-hint">Keyboard: A–D to answer · Enter for next</span>
+              <button class="btn btn-primary" id="nextBtn" disabled>Next question →</button>
+            </div>
+          </section>
+
+          <aside class="question-info">
+            <h3>Question details</h3>
+            <dl>
+              <div><dt>Topic</dt><dd id="infoTopic">—</dd></div>
+              <div><dt>Difficulty</dt><dd id="infoDifficulty">—</dd></div>
+              <div><dt>Mode</dt><dd id="infoMode">—</dd></div>
+              <div><dt>Time</dt><dd id="infoTime">—</dd></div>
+            </dl>
+            <div class="live-score-card"><span>Current score</span><strong id="liveScore">0%</strong><small id="liveWeighted">Weighted 0%</small></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view hidden" id="resultsView">
+        <div class="page-head results-heading">
+          <div><span class="eyebrow">SESSION REPORT</span><h2>Session complete</h2><p id="resultMessage">Here is your interview-readiness breakdown.</p></div>
+          <button class="btn btn-secondary" id="shareResultsBtn">Copy summary</button>
+        </div>
+        <div class="results-grid">
+          <div class="result-card score-summary">
+            <div class="score-ring" id="scoreRing"><span id="finalPercent">0%</span></div>
+            <div><span>Raw accuracy</span><strong id="rawAccuracy">0%</strong></div>
+            <div><span>Weighted score</span><strong id="weightedScore">0%</strong></div>
+            <div><span>Best streak</span><strong id="streakStat">0</strong></div>
+            <div><span>Avg response</span><strong id="avgTimeStat">—</strong></div>
+          </div>
+          <div class="result-card topic-performance"><h3>Topic performance</h3><div id="topicPerformance"></div></div>
+          <div class="result-card readiness-card"><span>Readiness assessment</span><strong id="readinessLabel">Developing</strong><p id="readinessText"></p><button class="text-btn" id="recommendedBtn">Practice weak areas →</button></div>
+        </div>
+        <div class="result-lower">
+          <div class="section-card"><div class="section-card-head"><div><h3>Review incorrect answers</h3><p>Focus on the explanation and why the distractors were weaker.</p></div></div><div class="review-list" id="reviewList"></div></div>
+          <div class="result-actions"><button class="btn btn-primary" id="newSessionBtn">New session</button><button class="btn btn-secondary" id="retryMissedBtn">Retry missed</button><button class="btn btn-secondary" onclick="window.print()">Print report</button></div>
+        </div>
+      </section>
+
+      <section class="view hidden" id="labsView">
+        <div class="page-head"><div><span class="eyebrow">INCIDENT PRACTICE</span><h2>Incident Lab</h2><p>Short, high-pressure sessions built from Advanced and Expert production scenarios.</p></div></div>
+        <div class="lab-banner">
+          <div><span class="lab-pill">6 questions</span><span class="lab-pill">45 sec each</span><span class="lab-pill">Advanced / Expert</span><h3>Production Incident Drill</h3><p>Move through Detect → Diagnose → Analyze → Remediate → Verify → Prevent. Each step is scored independently.</p></div>
+          <button class="btn btn-primary" data-start-mode="incident">Start incident lab →</button>
+        </div>
+        <div class="section-card"><h3>How the lab works</h3><div class="lab-steps"><div><b>1</b><span>Detect</span></div><div><b>2</b><span>Diagnose</span></div><div><b>3</b><span>Analyze</span></div><div><b>4</b><span>Remediate</span></div><div><b>5</b><span>Verify</span></div><div><b>6</b><span>Prevent</span></div></div></div>
+      </section>
+
+      <section class="view hidden" id="achievementsView">
+        <div class="page-head"><div><span class="eyebrow">PROGRESS</span><h2>Achievements</h2><p>Professional milestones based on your locally stored practice history.</p></div></div>
+        <div class="achievement-summary"><div><span>Sessions</span><strong id="totalSessions">0</strong></div><div><span>Questions answered</span><strong id="totalAnswered">0</strong></div><div><span>Correct answers</span><strong id="totalCorrect">0</strong></div><div><span>Best streak</span><strong id="allTimeStreak">0</strong></div></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
+      </section>
+
+      <section class="view hidden" id="settingsView">
+        <div class="page-head"><div><span class="eyebrow">PREFERENCES</span><h2>Settings</h2><p>Keep the interface focused and comfortable for longer practice sessions.</p></div></div>
+        <div class="settings-layout">
+          <div class="settings-tabs"><button class="active">Appearance</button><button disabled>Quiz preferences</button><button disabled>Data & privacy</button></div>
+          <div class="settings-panel">
+            <h3>Theme</h3>
+            <div class="theme-cards">
+              <button class="theme-card" data-theme-choice="system"><span class="theme-preview system-preview"></span><strong>System</strong></button>
+              <button class="theme-card" data-theme-choice="light"><span class="theme-preview light-preview"></span><strong>Light</strong></button>
+              <button class="theme-card active" data-theme-choice="dark"><span class="theme-preview dark-preview"></span><strong>Dark</strong></button>
+            </div>
+            <h3>Accent color</h3>
+            <div class="accent-row" id="accentRow"><button data-accent="#1597e5" class="active" style="--swatch:#1597e5"></button><button data-accent="#16b981" style="--swatch:#16b981"></button><button data-accent="#7c5cff" style="--swatch:#7c5cff"></button><button data-accent="#e99a24" style="--swatch:#e99a24"></button><button data-accent="#e25555" style="--swatch:#e25555"></button></div>
+            <div class="settings-switch-row"><div><strong>Terminal-style context blocks</strong><span>Use a code-console treatment for diagnostic hints.</span></div><label class="switch"><input type="checkbox" id="terminalToggle" checked><span></span></label></div>
+            <div class="settings-switch-row"><div><strong>Reduced motion</strong><span>Minimize transitions and animated progress.</span></div><label class="switch"><input type="checkbox" id="motionToggle"><span></span></label></div>
+            <div class="danger-zone"><div><strong>Reset local progress</strong><span>Clears quiz history, achievements, bookmarks and preferences on this browser.</span></div><button class="btn btn-danger" id="clearProgressBtn">Reset data</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view hidden" id="resourcesView">
+        <div class="page-head"><div><span class="eyebrow">RESOURCES</span><h2>Study resources</h2><p>Use the web app for repeated practice and the PDF when you want an offline question bank.</p></div></div>
+        <div class="resource-grid">
+          <a class="resource-card" href="resources/devops-interview-520-mcq-question-bank.pdf"><span>PDF</span><h3>520+ MCQ Question Bank</h3><p>Printable reference with answers and explanations appended at the end.</p><b>Open PDF →</b></a>
+          <a class="resource-card" href="https://github.com/naser-naseer/devops-interview-lab" target="_blank" rel="noopener"><span>GitHub</span><h3>Project repository</h3><p>View the source, CI checks, Pages workflow, and contribute improvements.</p><b>Open repository →</b></a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="assets/js/questions.js"></script>
+  <script src="assets/js/scoring.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

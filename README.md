@@ -6,6 +6,13 @@
 
 The project is intentionally static: no backend, no login, no database, and no tracking. It can run locally or be published directly with GitHub Pages.
 
+
+## Version 2 interface
+
+The current release adds a production-console style UI with four practice modes: **Practice**, **Interview**, **Incident Lab**, and **Custom Quiz**. It also adds timers, weighted difficulty scoring, readiness reporting, bookmarks, local achievements, dark/light/system themes, and cumulative topic progress while keeping the original 520-question bank intact.
+
+See [`docs/V2-UPGRADE.md`](docs/V2-UPGRADE.md) for the upgrade and deployment notes.
+
 ## Why this project exists
 
 DevOps interviews increasingly test how an engineer reasons through failure modes, operational trade-offs, and production incidents. This project turns a 520+ question bank into short randomized practice sessions that are easy to repeat.
